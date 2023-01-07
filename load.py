@@ -717,9 +717,10 @@ def update_last_scan_plant(entry=None):
     plantname = str(plugin.AST_last_scan_plant.get().split(" (Worth: ")[0])
     if entry is not None:
         plantname = orgi.generaltolocalised(entry["Species"].lower())
+    try:
         plantworth = vistagenomicsprices[plantname]
         worthstring = f"{plantworth:,} Cr."
-    else:
+    except KeyError:
         plantworth = None
         worthstring = "N/A"
     if plugin.AST_shorten_value.get():
